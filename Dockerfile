@@ -29,27 +29,25 @@ RUN curl -L -s -o /tmp/apache-maven-3.5.4.tar.gz http://apache.mirrors.spacedump
 
 
 # Schmetterling
-RUN git clone https://github.com/bjuvensjo/schmetterling.git /opt/schmetterling
-
-
-#RUN ln -s /opt/schmetterling/config/.m2 /root/.m2
-
+RUN git clone -b develop --single-branch https://github.com/bjuvensjo/schmetterling.git /opt/schmetterling   
 
 VOLUME /var/schmetterling/config
 VOLUME /var/schmetterling/pipeline
 VOLUME /var/schmetterling/plugin
+VOLUME /var/schmetterling/start
 VOLUME /var/schmetterling/work_dir
 
+ENV CONFIG_DIR /var/schmetterling/config
 ENV LANG C.UTF-8
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 ENV MAVEN_HOME /opt/maven
 ENV PIPELINE_DIR /var/schmetterling/pipeline
 ENV PIPELINE_NAME pipeline.py
 ENV PYTHONPATH "/opt/schmetterling/src:/var/schmetterling/pipeline:/var/schmetterling/plugin"
-ENV WORK_DIR /var/schmetterling/work_dir
 ENV USER_NAME schmetterling
+ENV WORK_DIR /var/schmetterling/work_dir
 
 EXPOSE 80
 
 WORKDIR /var/schmetterling/work_dir
-ENTRYPOINT ["/var/start/start.sh"]
+ENTRYPOINT ["/var/schmetterling/start/start.sh"]
