@@ -35,6 +35,7 @@ VOLUME /var/schmetterling/config
 VOLUME /var/schmetterling/pipeline
 VOLUME /var/schmetterling/plugin
 VOLUME /var/schmetterling/start
+VOLUME /var/schmetterling/share
 VOLUME /var/schmetterling/work_dir
 
 ENV CONFIG_DIR /var/schmetterling/config
